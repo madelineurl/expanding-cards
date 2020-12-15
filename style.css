@@ -1,15 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Muli', sans-serif;
   margin: 0;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   /* you can still use justify content if the flex-direction is column!
-  but it doesn't do anything */
+  but it doesn't do anything unless the height property is set */
   height: 100vh;
+
+  overflow: hidden;
+  /* don't scroll by default */
   align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 90vw;
+}
+
+.panel {
+  background-size: auto 100%;
+  /* change to below to preserve rounded corners on large screens */
+  /* background-size: cover; */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 40px;
+  color: #fff;
+  cursor: pointer;
+  flex: 0.5;
+  /* flex size will be higher when class is toggled to active */
+  margin: 10px;
+  position: relative;
+  /* if you want to position the children of a node absolutely relative to
+  the parent, the parent container has to be positioned relatively */
+  transition: flex 0.7s ease-in;
+  /* transition will be applied to the flex property for the listed duration
+  and with the chosen effect */
+}
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+/* if the panel div also has a class of active, increase size */
+.panel.active {
+  flex: 5;
+}
+
+.panel.active h3 {
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.4s;
+  /* adds a delay of 4 seconds */
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+
+  /* hide the fourth and fifth elements (only show 3 cards) when screen is small */
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
 }
